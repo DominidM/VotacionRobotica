@@ -1,0 +1,19 @@
+﻿/* pega aquí el contenido del archivo mostrado arriba */
+/* src/assets/style.css
+   Estilos mínimos globales para evitar error de build.
+   Personaliza según necesites.
+*/
+body {
+  font-family: Arial, Helvetica, sans-serif;
+  background: #f3f4f6;
+  color: #111827;
+  margin: 0;
+  padding: 0;
+}
+
+input, select, button, textarea {
+  font-family: inherit;
+  font-size: 1rem;
+}
+
+a { color: #2563eb; }
