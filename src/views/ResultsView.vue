@@ -1,0 +1,1 @@
+﻿<PASTE ResultsView.vue CONTENT ABOVE HERE>

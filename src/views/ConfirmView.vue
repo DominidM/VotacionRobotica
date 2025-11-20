@@ -1,0 +1,1 @@
+﻿<PASTE ConfirmView.vue CONTENT ABOVE HERE>

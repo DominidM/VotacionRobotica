@@ -1,0 +1,49 @@
+﻿rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    match /votes/{userId} {
+      allow create: if request.auth != null
+                    && request.auth.uid == userId
+                    && request.auth.token.email.matches('^n00[0-9]+@upn\\.pe$')
+                    && !exists(/databases/$(database)/documents/votes/$(userId))
+                    && validVote(request.resource.data);
+
+      allow read: if request.auth != null
+                  && (request.auth.token.admin == true
+                      || request.auth.token.email in adminsEmails());
+
+      allow update, delete: if false;
+    }
+
+    match /{document=**} {
+      allow read, write: if false;
+    }
+  }
+
+  function adminsEmails() {
+    return [
+      "jurado1@upn.pe",
+      "jurado2@upn.pe"
+    ];
+  }
+
+  function validVote(data) {
+    return data is map
+           && data.email is string
+           && data.email == request.auth.token.email
+           && data.name is string
+           && data.name.size() > 2
+           && data.career is string
+           && data.career in [
+               "Negocios",
+               "Ingeniería",
+               "Comunicaciones",
+               "Ciencias de la Salud",
+               "Arquitectura y Diseño",
+               "Derecho y Ciencias Políticas"
+              ]
+           && data.candidateId is string
+           && data.candidateId in ["proj1","proj2","proj3"]
+           && data.timestamp is timestamp;
+  }
+}
