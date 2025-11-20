@@ -2,86 +2,226 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Tema oscuro inspirado en el Figma */
+/* Tema oscuro (comentarios en español) */
 :root{
-  --bg-1: #071027;
-  --bg-2: #0f1724;
+  --fondo-1: #071027;
+  --fondo-2: #0f1724;
   --panel: rgba(255,255,255,0.02);
-  --border: rgba(255,255,255,0.04);
-  --muted: #9aa4b2;
+  --borde: rgba(255,255,255,0.04);
+  --texto-suave: #9aa4b2;
   --accent-start: #6d28d9; /* morado */
   --accent-end: #4f46e5;   /* indigo */
+  --card-radius: 14px;
 }
 
-/* Global */
+/* Globales */
 html,body,#app{
   height:100%;
   margin:0;
-  background: linear-gradient(180deg,var(--bg-1),var(--bg-2));
+  background: linear-gradient(180deg,var(--fondo-1),var(--fondo-2));
   color: #E6EEF8;
   font-family: Inter, ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
   -webkit-font-smoothing:antialiased;
   -moz-osx-font-smoothing:grayscale;
 }
 
-/* Card base (reutilizable) */
+/* Contenedor principal */
 .app-card{
   background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
-  border: 1px solid var(--border);
-  border-radius: 12px;
+  border: 1px solid var(--borde);
+  border-radius: var(--card-radius);
   padding: 1rem;
+  box-shadow: 0 8px 24px rgba(6,11,26,0.45);
 }
 
-/* Primary button estilo Figma */
-.btn-primary{
+/* Encabezados */
+.h1-principal{
+  font-size: 1.75rem;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  color: #eaf2ff;
+}
+
+/* Botón principal (estilo Figma: redondeado y con gradiente) */
+.btn-primario{
   display:inline-flex;
   align-items:center;
   justify-content:center;
-  gap:8px;
+  gap:.5rem;
   background: linear-gradient(90deg,var(--accent-start),var(--accent-end));
   color:#fff;
   padding:.6rem 1rem;
   border-radius:12px;
   font-weight:700;
   box-shadow: 0 8px 30px rgba(79,70,229,0.12);
+  transition: transform .12s ease, box-shadow .12s ease;
+}
+.btn-primario:hover{ transform: translateY(-3px); box-shadow: 0 14px 40px rgba(79,70,229,0.14); }
+
+/* Píldoras/filtros */
+.pildora{
+  background: rgba(255,255,255,0.03);
+  color: var(--texto-suave);
+  padding: .28rem .6rem;
+  border-radius: 999px;
+  font-size:.78rem;
+  border: 1px solid rgba(255,255,255,0.02);
 }
 
-/* Tarjeta en lista (izquierda) */
-.list-card {
-  background: linear-gradient(180deg, rgba(255,255,255,0.01), rgba(255,255,255,0.01));
+/* Input de búsqueda */
+.input-busqueda{
+  width:100%;
+  padding:.5rem .6rem;
+  border-radius:10px;
+  background: rgba(255,255,255,0.02);
+  border: 1px solid rgba(255,255,255,0.04);
+  color: #e6eef8;
+  outline: none;
+}
+.input-busqueda::placeholder{ color: #8896a8; }
+
+/* Lista lateral (cards pequeñas) */
+.card-lista {
+  background: linear-gradient(180deg, rgba(255,255,255,0.01), rgba(255,255,255,0.008));
   border: 1px solid rgba(255,255,255,0.02);
   border-radius: 10px;
   padding: .6rem;
   display:flex;
   gap:.75rem;
   align-items:center;
+  transition: background .12s ease, transform .06s ease;
+}
+.card-lista:hover{
+  background: rgba(255,255,255,0.015);
+  transform: translateY(-4px);
 }
 
-/* Thumb grande para lista principal (estilo Figma) */
-.thumb-lg {
-  width: 100%;
-  height: 200px;
-  border-radius: 10px;
-  object-fit: cover;
-  display:block;
+/* Thumb pequeño en la lista */
+.thumb-peq{
+  width:64px;
+  height:48px;
+  border-radius:8px;
+  object-fit:cover;
   background: linear-gradient(135deg,#0b1220,#071027);
-  border: 1px solid rgba(255,255,255,0.03);
+  border:1px solid rgba(255,255,255,0.03);
+  flex-shrink:0;
 }
 
-/* Tarjeta detalle central (columna tall) */
-.detail-panel {
-  background: #0b0f18;
+/* Tarjeta del listado principal (columna central) */
+.lista-proyectos-item{
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 8px 22px rgba(2,8,23,0.45);
+}
+
+/* Thumb grande (detalle/listado) */
+.thumb-grande{
+  width:100%;
+  height:200px;
+  object-fit:cover;
+  border-radius:10px;
+  display:block;
+  border:1px solid rgba(255,255,255,0.03);
+  background: linear-gradient(135deg,#0b1220,#071027);
+}
+
+/* Panel detalle */
+.panel-detalle{
+  background: linear-gradient(180deg,#060916,#091025);
   border-radius: 12px;
   padding: 1.25rem;
   border: 1px solid rgba(255,255,255,0.03);
 }
 
-/* texto suave */
-.text-muted { color: var(--muted); }
+/* Texto secundario */
+.texto-muted{ color: var(--texto-suave); }
 
-/* responsividad */
-@media (max-width: 900px) {
-  .thumb-lg { height: 140px; }
-  .app-grid { flex-direction: column; }
-  aside.w-80 { width: 100% !important; position: static; }
+/* Ajustes responsive */
+@media (max-width: 900px){
+  .thumb-grande{ height: 140px; }
+  .app-grid{ flex-direction: column; gap: 1rem; }
+  aside.w-80{ width:100% !important; position: static; }
+}
+
+/* --- Mejoras para móvil: pegar al final de src/assets/main.css --- */
+
+/* Ajustes generales en pantallas pequeñas */
+@media (max-width: 640px) {
+  /* Haz que el contenido use más padding lateral */
+  main, .max-w-6xl, .app-card {
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+
+  /* Título principal escala mejor en móvil */
+  .h1-principal {
+    font-size: 1.5rem; /* antes 1.75rem */
+    line-height: 1.15;
+  }
+
+  /* Más espacio entre tarjetas y sección */
+  .lista-proyectos-item {
+    margin-bottom: 1rem;
+    border-radius: 12px;
+  }
+
+  /* Thumb en móvil más compacto */
+  .thumb-grande { height: 160px; }
+
+  /* Inputs más altos y cómodos */
+  .input-busqueda {
+    padding: .75rem .9rem;
+    border-radius: 12px;
+    font-size: 0.95rem;
+  }
+
+  /* Píldoras un poco más grandes y con gap mayor */
+  .pildora {
+    padding: .36rem .7rem;
+    font-size: .82rem;
+  }
+
+  /* Botón primario ocupa todo el ancho en móvil y mayor padding táctil */
+  .btn-primario {
+    display: block !important;
+    width: 100% !important;
+    padding: .75rem 1rem !important;
+    border-radius: 12px;
+  }
+
+  /* Si el botón "Compartir" está junto al primario, que quede encima/abajo según espacio */
+  .app-card .flex > .btn-primario + button,
+  .app-card .flex > button + .btn-primario {
+    margin-top: .6rem;
+    width: 100%;
+  }
+
+  /* Reduce la anchura del header para no solapar */
+  header nav {
+    padding-left: .75rem;
+    padding-right: .75rem;
+  }
+
+  /* Evitar que el contenido lateral se vea "apretado" */
+  .app-grid {
+    gap: 1rem;
+  }
+
+  /* Mayor separación interna en las tarjetas de la lista lateral (si las usas) */
+  .card-lista, .card-lista:hover {
+    padding: .8rem;
+  }
+
+  /* Menú superior (si usas botones en header) */
+  header nav .btn-primario {
+    padding: .5rem .8rem;
+    font-size: .9rem;
+  }
+}
+
+/* Ajustes intermedios para tablets: más espacio horizontal */
+@media (min-width: 641px) and (max-width: 1024px) {
+  .thumb-grande { height: 200px; }
+  .h1-principal { font-size: 1.9rem; }
+  .app-grid { gap: 1.25rem; }
 }
