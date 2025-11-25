@@ -4,8 +4,8 @@
       <div class="container">
         <div class="brand">
           <router-link to="/" class="brand-link" aria-label="Inicio">
-            <span class="brand-badge" aria-hidden="true">R</span>
-            <span class="brand-text">Feria Robótica / IOT</span>
+            <span class="brand-badge" aria-hidden="true">UPN</span>
+            <span class="brand-text">EXPOCREA UPN - IoT</span>
           </router-link>
         </div>
 
